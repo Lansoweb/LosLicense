@@ -1,55 +1,31 @@
 {
-    "name": "doctrine/doctrine-orm-module",
-    "description": "Zend Framework 2 Module that provides Doctrine ORM functionality",
+    "name": "los/loslicense",
+    "description": "LosLicense provides a module to manage license keys for your ZF2 application",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "doctrine",
-        "orm",
+        "los",
+        "license",
         "module",
         "zf2"
     ],
-    "homepage": "http://www.doctrine-project.org/",
+    "homepage": "http://github.com/Lansoweb/LosLicense",
     "authors": [
         {
-            "name": "Kyle Spraggs",
-            "email": "theman@spiffyjr.me",
-            "homepage": "http://www.spiffyjr.me/"
-        },
-        {
-            "name": "Marco Pivetta",
-            "email": "ocramius@gmail.com",
-            "homepage": "http://marco-pivetta.com/"
-        },
-        {
-            "name": "Evan Coury",
-            "email": "me@evancoury.com",
-            "homepage": "http://blog.evan.pro/"
-        },
-        {
-            "name": "Guilherme Blanco",
-            "email": "guilhermeblanco@hotmail.com"
+            "name": "Leandro Silva",
+            "email": "lansoweb@hotmail.com",
+            "homepage": "https://github.com/Lansoweb/"
         }
     ],
     "require": {
         "php": ">=5.3.3",
-        "doctrine/doctrine-module": ">=0.5.1",
-        "doctrine/orm": ">=2.3-dev,<2.5-dev",
-        "doctrine/dbal": ">=2.3-dev,<2.5-dev",
-        "doctrine/migrations": "1.*",
         "zendframework/zendframework": "2.*"
-    },
-    "require-dev": {
-        "zendframework/zend-developer-tools": "dev-master"
-    },
-    "suggest": {
-        "zendframework/zend-developer-tools": "zend-developer-tools if you want to profile operations executed by the ORM during development"
     },
     "minimum-stability": "alpha",
     "autoload": {
         "psr-0": {
-            "DoctrineORMModule\\": "src/",
-            "DoctrineORMModuleTest\\": "tests/"
+            "LosLicense\\": "src/",
+            "LosLicenseTest\\": "tests/"
         }
     }
 }
