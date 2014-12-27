@@ -4,13 +4,12 @@
 This is a module to manage license keys for your application.
 
 It can create and validate licenses based on configurable options:
-- IP address
-- MAC address
 - Date (ie. evaluation time or expiry date. Can use start, end or both)
 - Domain (e.g. test.com)
-- Server OS (e.g. Linux, Mac, Windows, ...)
-- Server name (e.g. server.test.com)
-- PHP Version (comparison is possible, e.g. >= 5.3.1)
+
+You can define application features with the license, and check for them at runtime to limit the funcionality (eg. demo version).
+
+You can combine this module with [LosDomain](http://github.com/LansoWeb/LosDomain) to have different license per domain (eg. clients in a SaaS).
 
 ## ATTENTION!!!
 This module does not encode your application or protects your code in ANY way (like Zend Guard and ionCube), 

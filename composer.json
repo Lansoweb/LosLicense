@@ -1,31 +1,23 @@
 {
-    "name": "los/loslicense",
-    "description": "LosLicense provides a module to manage license keys for your ZF2 application",
-    "type": "library",
-    "license": "MIT",
-    "keywords": [
-        "los",
-        "license",
-        "module",
-        "zf2"
-    ],
-    "homepage": "http://github.com/Lansoweb/LosLicense",
-    "authors": [
-        {
-            "name": "Leandro Silva",
-            "email": "lansoweb@hotmail.com",
-            "homepage": "https://github.com/Lansoweb/"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.3",
-        "zendframework/zendframework": "2.*"
-    },
-    "minimum-stability": "alpha",
-    "autoload": {
-        "psr-0": {
-            "LosLicense\\": "src/",
-            "LosLicenseTest\\": "tests/"
-        }
+  "name" : "los/loslicense",
+  "description" : "LosLicense provides a module to manage license keys for your ZF2 application",
+  "require" : {
+    "php" : ">=5.4.0",
+    "zendframework/zendframework" : "2.3.*"
+  },
+  "authors" : [ {
+    "name" : "Leandro Silva",
+    "email" : "lansoweb@hotmail.com",
+    "homepage" : "https://leandrosilva.info/Lansoweb/"
+  } ],
+  "keywords" : [ "los", "license", "module", "zf2" ],
+  "minimum-stability" : "beta",
+  "autoload" : {
+    "psr-0" : {
+      "LosLicense\\" : "src/"
     }
+  },
+  "license" : "BSD",
+  "type" : "library",
+  "homepage" : "http://github.com/Lansoweb/LosLicense"
 }
