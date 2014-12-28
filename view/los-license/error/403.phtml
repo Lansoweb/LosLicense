@@ -1,0 +1,30 @@
+<h2>A 403 error occurred</h2>
+
+<p>You are not allowed to access this resource</p>
+
+<h3>Details</h3>
+
+<?php
+use LosLicense\Service\ValidatorService;
+
+switch ($this->error) {
+    case ValidatorService::LICENSE_INVALID:
+        echo '<p>Invalid license file</p>';
+        break;
+    case ValidatorService::LICENSE_BEFORE:
+        echo '<p>License used before the validation date</p>';
+        break;
+    case ValidatorService::LICENSE_EXPIRED:
+        echo '<p>Expired license</p>';
+        break;
+        case ValidatorService::LICENSE_TEMPERED:
+            echo '<p>License file was tempered</p>';
+            break;
+    case ValidatorService::MISSING_LICENSE:
+        echo '<p>License type not allowed</p>';
+        break;
+    case ValidatorService::MISSING_FEATURE:
+        echo '<p>License does not have all required features</p>';
+        break;
+}
+?>
