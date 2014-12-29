@@ -8,63 +8,66 @@
  * @license    http://opensource.org/licenses/MIT   MIT License
  * @link       http://github.com/LansoWeb/LosLicense
  */
-namespace LosLicenseTest\View\Helper;
+namespace LosLicenseTest\Mvc\Controller\Plugin;
 
-use LosLicense\View\Helper\IsLicensed;
+use LosLicense\Mvc\Controller\Plugin\HasFeature;
 use LosLicenseTest\ServiceManagerTestCase;
 use LosLicenseTest\TestCase;
 
-class IsLicensedTest extends TestCase
+class HasFeatureTest extends TestCase
 {
     protected $helper;
 
     public function setUpLicense($globPath)
     {
         parent::setUpLicense($globPath);
-        $this->helper = new IsLicensed($this->getValidatorService());
+        $this->helper = new HasFeature($this->getValidatorService());
     }
 
     public function testNoLicense()
     {
         $this->setUpNoLicense();
-        $res = $this->helper->__invoke();
-        $this->assertTrue($res);
+        $res = $this->helper->__invoke('num_teste');
+        $this->assertFalse($res);
     }
 
     public function testInvalidLicenseFile()
     {
         $this->setUpInvalidLicense();
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
-        $res = $this->helper->__invoke();
+        $res = $this->helper->__invoke('num_teste');
     }
 
     public function testOutOfDateLicense()
     {
         $this->setUpBeforeLicense();
-        $res = $this->helper->__invoke();
+        $res = $this->helper->__invoke('num_teste');
         $this->assertFalse($res);
-        $this->assertSame('license-before', $this->getValidatorService()->getError());
 
         $this->setUpExpiredLicense();
-        $res = $this->helper->__invoke();
+        $res = $this->helper->__invoke('num_teste');
         $this->assertFalse($res);
-        $this->assertSame('license-expired', $this->getValidatorService()->getError());
     }
     
     public function testTemperedLicense()
     {
         $this->setUpTemperedLicense();
-        $res = $this->helper->__invoke();
+        $res = $this->helper->__invoke('num_teste');
         $this->assertFalse($res);
-        $this->assertSame('license-tempered', $this->getValidatorService()->getError());
     }
     
-    public function testValidLicense()
+    public function testHasFeature()
     {
         $this->setUpValidLicense();
-        $res = $this->helper->__invoke();
+        $res = $this->helper->__invoke('num_teste');
         $this->assertTrue($res);
-        $this->assertFalse($this->getValidatorService()->getError());
+    }
+
+    public function testNotHasFeature()
+    {
+        $this->setUpValidLicense();
+        $res = $this->helper->__invoke('num_teste2');
+        $this->assertFalse($res);
     }
     
 }
