@@ -1,0 +1,11 @@
+<?php
+
+return array(
+    'modules' => array(
+        'LosLicense',
+    ),
+    'module_listener_options' => array(
+        'config_glob_paths' => array(__DIR__.'/LosLicenseTest/config/loslicense.global.php'),
+        'module_paths' => array(),
+    ),
+);
