@@ -61,8 +61,10 @@ class ValidatorService
     public static function signLicense(License $license)
     {
         $str = $license->toArray();
+        $salt = $license->getSinagureSalt();
         unset($str['signature']);
-        $hash = md5(json_encode($str));
+        unset($str['attributes']);
+        $hash = md5(json_encode($str) . $salt);
 
         return $hash;
     }

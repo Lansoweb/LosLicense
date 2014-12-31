@@ -29,6 +29,8 @@ class License extends AbstractOptions
 
     protected $signature;
 
+    protected $sinagure_salt = 'SaltToBeUsed';
+
     public function getType()
     {
         return $this->type;
@@ -152,4 +154,16 @@ class License extends AbstractOptions
 
         return $this;
     }
+
+    public function getSinagureSalt()
+    {
+        return $this->sinagure_salt;
+    }
+
+    public function setSinagureSalt($sinagure_salt)
+    {
+        $this->sinagure_salt = $sinagure_salt;
+        return $this;
+    }
+
 }

@@ -12,7 +12,7 @@ class ModuleOptions extends AbstractOptions
 
     protected $licensedValidators = [];
 
-    protected $unlicensedMode = 'allow';
+    protected $unlicensedMode = 'blacklist';
 
     protected $templateStrategy;
 
