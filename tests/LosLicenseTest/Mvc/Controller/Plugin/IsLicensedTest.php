@@ -8,9 +8,9 @@
  * @license    http://opensource.org/licenses/MIT   MIT License
  * @link       http://github.com/LansoWeb/LosLicense
  */
-namespace LosLicenseTest\View\Helper;
+namespace LosLicenseTest\Mvc\Controller\Plugin;
 
-use LosLicense\View\Helper\IsLicensed;
+use LosLicense\Mvc\Controller\Plugin\IsLicensed;
 use LosLicenseTest\ServiceManagerTestCase;
 use LosLicenseTest\TestCase;
 
