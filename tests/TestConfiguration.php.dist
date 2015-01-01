@@ -5,7 +5,7 @@ return array(
         'LosLicense',
     ),
     'module_listener_options' => array(
-        'config_glob_paths' => array(__DIR__.'/LosLicenseTest/config/loslicense.global.php'),
+        'config_glob_paths' => array(),
         'module_paths' => array(),
     ),
 );

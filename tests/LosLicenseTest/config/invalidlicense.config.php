@@ -1,5 +1,4 @@
 <?php
-use \LosLicense\License\License;
 
 $conf = [
     'license' => [

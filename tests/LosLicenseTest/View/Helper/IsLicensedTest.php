@@ -11,7 +11,6 @@
 namespace LosLicenseTest\View\Helper;
 
 use LosLicense\View\Helper\IsLicensed;
-use LosLicenseTest\ServiceManagerTestCase;
 use LosLicenseTest\TestCase;
 
 class IsLicensedTest extends TestCase
@@ -50,7 +49,7 @@ class IsLicensedTest extends TestCase
         $this->assertFalse($res);
         $this->assertSame('license-expired', $this->getValidatorService()->getError());
     }
-    
+
     public function testTemperedLicense()
     {
         $this->setUpTemperedLicense();
@@ -58,7 +57,7 @@ class IsLicensedTest extends TestCase
         $this->assertFalse($res);
         $this->assertSame('license-tempered', $this->getValidatorService()->getError());
     }
-    
+
     public function testValidLicense()
     {
         $this->setUpValidLicense();
@@ -66,5 +65,5 @@ class IsLicensedTest extends TestCase
         $this->assertTrue($res);
         $this->assertFalse($this->getValidatorService()->getError());
     }
-    
+
 }

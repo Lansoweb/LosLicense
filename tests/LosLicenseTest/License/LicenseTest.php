@@ -11,29 +11,28 @@
 namespace LosLicenseTest\License;
 
 use LosLicense\License\License;
-use LosLicenseTest\ServiceManagerTestCase;
 use LosLicenseTest\TestCase;
+use LosLicenseTest\ServiceManagerTestCase;
 
 class LicenseTest extends TestCase
 {
     protected $license;
-    protected $rawFeatures = 
+    protected $rawFeatures =
     [
         'feature1',
-        ['feature2' => 10]
+        'feature2' => 10
     ];
     protected $rawAttributes =
     [
         'attribute1',
-        ['attribute2' => 10]
+        'attribute2' => 10
     ];
-    
 
     public function setUp()
     {
         $this->license = new License();
     }
-    
+
     public function setUpLicense($globPath)
     {
         parent::setUpLicense($globPath);
@@ -65,7 +64,7 @@ class LicenseTest extends TestCase
         $this->license->setValidUntil($date);
         $this->assertSame($date, $this->license->getValidUntil()->format('Y-m-d H:i:s'));
     }
-    
+
     public function testInvalidUntil()
     {
         $this->setExpectedException('LosLicense\Exception\InvalidArgumentException');
@@ -97,7 +96,7 @@ class LicenseTest extends TestCase
         $this->license->setCustomer($customer);
         $this->assertSame($customer, $this->license->getCustomer());
     }
-    
+
     public function testFeatures()
     {
         $features = [
@@ -107,7 +106,7 @@ class LicenseTest extends TestCase
         $this->license->setFeatures($this->rawFeatures);
         $this->assertSame($features, $this->license->getFeatures());
     }
-    
+
     public function testHasFeature()
     {
         $this->license->setFeatures($this->rawFeatures);
@@ -130,14 +129,14 @@ class LicenseTest extends TestCase
         $this->license->setAttributes($this->rawAttributes);
         $this->assertSame($attributes, $this->license->getAttributes());
     }
-    
+
     public function testHasAttribute()
     {
         $this->license->setAttributes($this->rawAttributes);
         $this->assertTrue($this->license->hasAttribute('attribute1'));
         $this->assertFalse($this->license->hasAttribute('attribute0'));
     }
-    
+
     public function testGetAttributes()
     {
         $this->license->setAttributes($this->rawAttributes);
@@ -150,5 +149,5 @@ class LicenseTest extends TestCase
         $this->license->setSignature($signature);
         $this->assertSame($signature, $this->license->getSignature());
     }
-    
+
 }

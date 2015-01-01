@@ -29,8 +29,6 @@ class License extends AbstractOptions
 
     protected $signature;
 
-    protected $sinagure_salt = 'SaltToBeUsed';
-
     public function getType()
     {
         return $this->type;
@@ -106,13 +104,12 @@ class License extends AbstractOptions
     public function setFeatures(array $features)
     {
         $list = [];
-        foreach ($features as $feature) {
-            if (!is_array($feature)) {
-                $list[$feature] = null;
-            } else {
-                list($key, $value) = each($feature);
-                $list[$key] = $value;
+        foreach ($features as $feature => $value) {
+            if (is_numeric($feature)) {
+                $feature = $value;
+                $value = null;
             }
+            $list[$feature] = $value;
         }
         $this->features = $list;
 
@@ -121,6 +118,10 @@ class License extends AbstractOptions
 
     public function hasFeature($features)
     {
+        if (empty($this->features)) {
+            return false;
+        }
+
         if (!is_array($features)) {
             $features = (array) $features;
         }
@@ -131,6 +132,17 @@ class License extends AbstractOptions
         return true;
     }
 
+    public function getFeature($feature)
+    {
+        if (empty($this->features)) {
+            return false;
+        }
+
+        if (in_array($feature, array_keys($this->features))) return $this->features[$feature];
+
+        return false;
+    }
+
     public function getAttributes()
     {
         return $this->attributes;
@@ -138,9 +150,44 @@ class License extends AbstractOptions
 
     public function setAttributes(array $attributes)
     {
-        $this->attributes = $attributes;
+        $list = [];
+        foreach ($attributes as $attribute => $value) {
+            if (is_numeric($attribute)) {
+                $attribute = $value;
+                $value = null;
+            }
+            $list[$attribute] = $value;
+        }
+        $this->attributes = $list;
 
         return $this;
+    }
+
+    public function hasAttribute($attributes)
+    {
+        if (empty($this->attributes)) {
+            return false;
+        }
+
+        if (!is_array($attributes)) {
+            $attributes = (array) $attributes;
+        }
+        foreach ($attributes as $attribute) {
+            if (!in_array($attribute, array_keys($this->attributes))) return false;
+        }
+
+        return true;
+    }
+
+    public function getAttribute($attribute)
+    {
+        if (empty($this->attributes)) {
+            return false;
+        }
+
+        if (in_array($attribute, array_keys($this->attributes))) return $this->attributes[$attribute];
+
+        return false;
     }
 
     public function getSignature()
@@ -152,17 +199,6 @@ class License extends AbstractOptions
     {
         $this->signature = $signature;
 
-        return $this;
-    }
-
-    public function getSinagureSalt()
-    {
-        return $this->sinagure_salt;
-    }
-
-    public function setSinagureSalt($sinagure_salt)
-    {
-        $this->sinagure_salt = $sinagure_salt;
         return $this;
     }
 

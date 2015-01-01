@@ -10,6 +10,8 @@
 namespace LosLicense;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Console\Adapter\AdapterInterface as Console;
 
 /**
  * Module class
@@ -19,7 +21,7 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
  * @license    https://github.com/Lansoweb/LosLicense/blob/master/LICENSE BSD-3 License
  * @link       http://github.com/LansoWeb/LosLicense
  */
-class Module implements AutoloaderProviderInterface
+class Module implements AutoloaderProviderInterface, ConsoleUsageProviderInterface
 {
     public function onBootstrap($e)
     {
@@ -53,5 +55,13 @@ class Module implements AutoloaderProviderInterface
     public function getConfig()
     {
         return include __DIR__.'/../../config/module.config.php';
+    }
+
+    public function getConsoleUsage(Console $console)
+    {
+        return array(
+            'loslicense create' => 'Creates a new license',
+            array( '[<outputFile>]'   , 'file to write the license to', 'Prints the output to screen if not provided' ),
+        );
     }
 }

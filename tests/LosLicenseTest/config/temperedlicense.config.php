@@ -5,8 +5,6 @@ $conf = [
     'sign_license' => true,
     'license' => [
         'type' => License::LICENSE_TRIAL,
-        'valid_from' => '2014-12-25 12:01:02',
-        'valid_until' => '2014-12-30',
         'customer' => 'Leandro Silva',
         'features' => [
             'test'

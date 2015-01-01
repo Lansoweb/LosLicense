@@ -106,8 +106,16 @@ class ControllerValidator extends AbstractValidator
     public function checkUnlicensed(MvcEvent $event)
     {
         $routeMatch = $event->getRouteMatch();
+        $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
         $controller = strtolower($routeMatch->getParam('controller'));
         $action = strtolower($routeMatch->getParam('action'));
+
+        /**
+         * LosLicense routes are always accepted
+         */
+        if (strpos($matchedRouteName, 'loslicense') === 0) {
+            return true;
+        }
 
         $options = $this->getServiceLocator()->get('loslicense.options');
 

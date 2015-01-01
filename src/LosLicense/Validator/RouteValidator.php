@@ -77,6 +77,13 @@ class RouteValidator extends AbstractValidator
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
 
+        /**
+         * LosLicense routes are always accepted
+         */
+        if (strpos($matchedRouteName, 'loslicense') === 0) {
+            return true;
+        }
+
         $options = $this->getServiceLocator()->get('loslicense.options');
 
         if (empty($this->routes)) {

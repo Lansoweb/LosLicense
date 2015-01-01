@@ -91,7 +91,7 @@ $conf = [
      */
     'features' => [
         /*
-        ['maxUsers' => 20],
+        'maxUsers' => 20,
         'testFeature'
         */
     ],
@@ -129,11 +129,13 @@ $conf = [
         'valid_until' => '2014-12-30',
         'customer' => 'Leandro Silva',
         'features' => [
-            ['maxUsers' => 2]
+            'maxUsers' => 2,
+            'singleFeature'
         ],
         'attributes' => [
             'contact' => 'contact@theircompany.com'
-            'testNumber' => 20
+            'testNumber' => 20,
+            'singleAttribute'
         ],
         'signature' => '1f22f0199f9e9646a8dc59c6dd45d9d4'
     ],

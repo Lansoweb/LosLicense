@@ -10,7 +10,6 @@
  */
 namespace LosLicenseTest;
 
-use LosLicenseTest\ServiceManagerTestCase;
 use LosLicense\Service\ValidatorServiceAwareTrait;
 
 class TestCase extends \PHPUnit_Framework_TestCase
@@ -60,5 +59,5 @@ class TestCase extends \PHPUnit_Framework_TestCase
     {
         $this->setUpLicense(realpath(__DIR__.'/config/validlicense.config.php'));
     }
-    
+
 }

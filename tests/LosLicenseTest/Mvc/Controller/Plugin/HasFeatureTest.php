@@ -11,7 +11,6 @@
 namespace LosLicenseTest\Mvc\Controller\Plugin;
 
 use LosLicense\Mvc\Controller\Plugin\HasFeature;
-use LosLicenseTest\ServiceManagerTestCase;
 use LosLicenseTest\TestCase;
 
 class HasFeatureTest extends TestCase
@@ -27,7 +26,7 @@ class HasFeatureTest extends TestCase
     public function testNoLicense()
     {
         $this->setUpNoLicense();
-        $res = $this->helper->__invoke('num_teste');
+        $res = $this->helper->__invoke('numTest');
         $this->assertFalse($res);
     }
 
@@ -35,39 +34,39 @@ class HasFeatureTest extends TestCase
     {
         $this->setUpInvalidLicense();
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
-        $res = $this->helper->__invoke('num_teste');
+        $res = $this->helper->__invoke('numTest');
     }
 
     public function testOutOfDateLicense()
     {
         $this->setUpBeforeLicense();
-        $res = $this->helper->__invoke('num_teste');
+        $res = $this->helper->__invoke('numTest');
         $this->assertFalse($res);
 
         $this->setUpExpiredLicense();
-        $res = $this->helper->__invoke('num_teste');
+        $res = $this->helper->__invoke('numTest');
         $this->assertFalse($res);
     }
-    
+
     public function testTemperedLicense()
     {
         $this->setUpTemperedLicense();
-        $res = $this->helper->__invoke('num_teste');
+        $res = $this->helper->__invoke('numTest');
         $this->assertFalse($res);
     }
-    
+
     public function testHasFeature()
     {
         $this->setUpValidLicense();
-        $res = $this->helper->__invoke('num_teste');
+        $res = $this->helper->__invoke('numTest');
         $this->assertTrue($res);
     }
 
     public function testNotHasFeature()
     {
         $this->setUpValidLicense();
-        $res = $this->helper->__invoke('num_teste2');
+        $res = $this->helper->__invoke('numTest2');
         $this->assertFalse($res);
     }
-    
+
 }

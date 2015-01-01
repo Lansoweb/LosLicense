@@ -3,6 +3,7 @@ namespace LosLicense\Service;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use LosLicense\License\License;
+use LosLicense\Exception\InvalidArgumentException;
 
 class ValidatorService
 {
@@ -58,12 +59,29 @@ class ValidatorService
         return true;
     }
 
-    public static function signLicense(License $license)
+    public function signLicense($license)
     {
-        $str = $license->toArray();
-        $salt = $license->getSinagureSalt();
-        unset($str['signature']);
-        unset($str['attributes']);
+        $options = $this->getServiceLocator()->get('loslicense.options');
+
+        if ($license instanceof License) {
+            $str = $license->toArray();
+            if (array_key_exists('valid_from', $str) && !empty($str['valid_from'])) {
+                $str['valid_from'] = $str['valid_from']->format('Y-m-d H:i:s');
+            }
+            if (array_key_exists('valid_until', $str) && !empty($str['valid_until'])) {
+                $str['valid_until'] = $str['valid_until']->format('Y-m-d H:i:s');
+            }
+        }
+        else {
+            $str = $license;
+        }
+
+        if (is_array($str)) {
+            unset($str['signature']);
+            unset($str['attributes']);
+        }
+
+        $salt = $options->getSignatureSalt();
         $hash = md5(json_encode($str) . $salt);
 
         return $hash;

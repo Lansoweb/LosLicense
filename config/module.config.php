@@ -11,7 +11,7 @@ return [
             'LosLicense\License\License' => 'LosLicense\License\LicenseFactory',
             'LosLicense\Options\ModuleOptions' => 'LosLicense\Options\ModuleOptionsFactory',
 
-            'LosLicense\Validator\Validators' => 'LosLicense\Validator\ValidatorsFactory',
+            'LosLicense\Validator\Validators' => 'LosLicense\Validator\ValidatorsFactory'
         ],
         'aliases' => [
             'loslicense.license' => 'LosLicense\License\License',
@@ -41,21 +41,22 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'LosLicense\Controller\Index' => 'LosLicense\Controller\IndexController'
+            'LosLicense\Controller\Console' => 'LosLicense\Controller\ConsoleController'
         ]
     ],
-    'router' => [
-        'routes' => [
-            'los-license' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/index',
-                    'defaults' => [
-                        '__NAMESPACE__' => 'LosLicense\Controller',
-                        'controller' => 'Index',
-                        'action' => 'index'
+    'console' => [
+        'router' => [
+            'routes' => [
+                'loslicense-create' => [
+                    'options' => [
+                        'route' => 'loslicense create [<outputFile>]',
+                        'defaults' => [
+                            '__NAMESPACE__' => 'LosLicense\Controller',
+                            'controller' => 'Console',
+                            'action' => 'create'
+                        ]
                     ]
-                ],
+                ]
             ]
         ]
     ],

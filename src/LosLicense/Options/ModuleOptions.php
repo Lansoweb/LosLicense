@@ -22,6 +22,8 @@ class ModuleOptions extends AbstractOptions
 
     protected $signLicense = false;
 
+    protected $signature_salt = 'SaltToBeUsed';
+
     protected $license;
 
     public function getUnlicensedValidators()
@@ -97,7 +99,15 @@ class ModuleOptions extends AbstractOptions
 
     public function setFeatures(array $features)
     {
-        $this->features = $features;
+        $list = [];
+        foreach ($features as $feature => $value) {
+            if (is_numeric($feature)) {
+                $feature = $value;
+                $value = null;
+            }
+            $list[$feature] = $value;
+        }
+        $this->features = $list;
 
         return $this;
     }
@@ -111,6 +121,17 @@ class ModuleOptions extends AbstractOptions
     {
         $this->signLicense = $signLicense;
 
+        return $this;
+    }
+
+    public function getSignatureSalt()
+    {
+        return $this->signature_salt;
+    }
+
+    public function setSignatureSalt($signature_salt)
+    {
+        $this->signature_salt = $signature_salt;
         return $this;
     }
 

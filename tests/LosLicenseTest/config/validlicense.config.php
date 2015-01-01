@@ -3,24 +3,24 @@ use \LosLicense\License\License;
 
 $conf = [
     'features' => [
-        ['num_teste' => 20],
+        'numTest' => 20,
         'testFeature'
     ],
     'sign_license' => true,
     'license' => [
         'type' => License::LICENSE_TRIAL,
-        'valid_from' => '2014-12-25 12:01:02',
-        'valid_until' => '2014-12-30',
+        'valid_from' => (new DateTime('-1 day'))->format('Y-m-d'),
+        'valid_until' => (new DateTime('+1 day'))->format('Y-m-d'),
         'customer' => 'Leandro Silva',
         'features' => [
-            ['num_teste' => 5],
-            'teste'
+            'numTest' => 5,
+            'testFeature'
         ],
         'attributes' => [
-            ['max_att' => 20],
-            'test_att'
+            'maxAtt' => 20,
+            'testAtt'
         ],
-        'signature' => 'ebe5db33b826f95f115c858a0a9bfcea'
+        'signature' => 'e51703ef35f7ee5bd00afe3dabb2d6d0'
     ],
 ];
 
