@@ -139,7 +139,6 @@ class License extends AbstractOptions
         }
 
         if (in_array($feature, array_keys($this->features))) return $this->features[$feature];
-
         return false;
     }
 
@@ -186,7 +185,6 @@ class License extends AbstractOptions
         }
 
         if (in_array($attribute, array_keys($this->attributes))) return $this->attributes[$attribute];
-
         return false;
     }
 

@@ -11,7 +11,6 @@ use Zend\Console\Prompt\Select;
 use Zend\Console\Prompt\Confirm;
 use LosLicense\License\License;
 use LosLicense\Console\Prompt\Checkbox;
-use Zend\Stdlib\ArrayUtils;
 use LosLicense\Service\ValidatorServiceAwareTrait;
 
 class ConsoleController extends AbstractActionController
@@ -102,8 +101,7 @@ class ConsoleController extends AbstractActionController
                         if ($value === null) {
                             $config->features->$feature = null;
                             $licenseFeatures[$feature] = null;
-                        }
-                        else {
+                        } else {
                             $config->features->$feature = $value;
                             $licenseFeatures[$feature] = $value;
                         }
@@ -119,8 +117,7 @@ class ConsoleController extends AbstractActionController
 
             if ($outputFile) {
                 $writer->toFile($outputFile, $config);
-            }
-            else {
+            } else {
                 echo $writer->toString($config);
             }
             $console->writeLine("License created", Color::GREEN);

@@ -12,7 +12,6 @@ namespace LosLicenseTest\License;
 
 use LosLicense\License\License;
 use LosLicenseTest\TestCase;
-use LosLicenseTest\ServiceManagerTestCase;
 
 class LicenseTest extends TestCase
 {

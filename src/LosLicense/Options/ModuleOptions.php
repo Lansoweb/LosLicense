@@ -132,6 +132,7 @@ class ModuleOptions extends AbstractOptions
     public function setSignatureSalt($signature_salt)
     {
         $this->signature_salt = $signature_salt;
+
         return $this;
     }
 

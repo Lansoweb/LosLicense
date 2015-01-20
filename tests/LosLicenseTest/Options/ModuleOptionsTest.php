@@ -1,9 +1,7 @@
 <?php
-namespace LosLicenseTest;
+namespace LosLicenseTest\Options;
 
-use LosLicenseTest\TestCase;
 use LosLicense\Options\ModuleOptions;
-use LosLicense\View\Strategy\TemplateStrategy;
 use LosLicense\Options\TemplateStrategyOptions;
 use LosLicense\Options\RedirectStrategyOptions;
 use LosLicense\License\License;
@@ -221,4 +219,3 @@ class ModuleOptionsTest extends TestCase
         ]);
     }
 }
-

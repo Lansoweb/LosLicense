@@ -32,10 +32,10 @@ class Checkbox extends Char
     /**
      * Ask the user to select any number of pre-defined options
      *
-     * @param string    $promptText     The prompt text to display in console
-     * @param array     $options        Allowed options
-     * @param bool      $allowEmpty     Allow empty (no) selection?
-     * @param bool      $echo           True to display selected option?
+     * @param  string                           $promptText The prompt text to display in console
+     * @param  array                            $options    Allowed options
+     * @param  bool                             $allowEmpty Allow empty (no) selection?
+     * @param  bool                             $echo       True to display selected option?
      * @throws Exception\BadMethodCallException if no options available
      */
     public function __construct($promptText = 'Please select one option (Enter to finish) ', $options = array(), $allowEmpty = false, $echo = false)
@@ -62,7 +62,7 @@ class Checkbox extends Char
     /**
      * Show a list of options and prompt the user to select any number of them.
      *
-     * @return array       Checked options
+     * @return array Checked options
      */
     public function show()
     {
@@ -112,13 +112,14 @@ class Checkbox extends Char
         } while ($response != "\r" && $response != "\n");
 
         $this->lastResponse = $checked;
+
         return $checked;
     }
 
     /**
      * Set allowed options
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable               $options
      * @throws Exception\BadMethodCallException
      */
     public function setOptions($options)
