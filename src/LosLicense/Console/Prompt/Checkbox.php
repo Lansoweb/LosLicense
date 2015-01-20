@@ -27,7 +27,7 @@ class Checkbox extends Char
     /**
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * Ask the user to select any number of pre-defined options
@@ -38,7 +38,7 @@ class Checkbox extends Char
      * @param  bool                             $echo       True to display selected option?
      * @throws Exception\BadMethodCallException if no options available
      */
-    public function __construct($promptText = 'Please select one option (Enter to finish) ', $options = array(), $allowEmpty = false, $echo = false)
+    public function __construct($promptText = 'Please select one option (Enter to finish) ', $options = [], $allowEmpty = false, $echo = false)
     {
         if ($promptText !== null) {
             $this->setPromptText($promptText);
@@ -129,7 +129,7 @@ class Checkbox extends Char
         }
 
         if (! is_array($options)) {
-            $this->options = array();
+            $this->options = [];
             foreach ($options as $k => $v) {
                 $this->options[$k] = $v;
             }

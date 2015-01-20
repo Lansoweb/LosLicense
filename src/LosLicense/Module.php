@@ -40,16 +40,16 @@ class Module implements AutoloaderProviderInterface, ConsoleUsageProviderInterfa
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+        return [
+            'Zend\Loader\ClassMapAutoloader' => [
                 __DIR__.'/../../autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            ],
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     public function getConfig()
@@ -59,9 +59,9 @@ class Module implements AutoloaderProviderInterface, ConsoleUsageProviderInterfa
 
     public function getConsoleUsage(Console $console)
     {
-        return array(
+        return [
             'loslicense create' => 'Creates a new license',
-            array( '[<outputFile>]'   , 'file to write the license to', 'Prints the output to screen if not provided' ),
-        );
+            [ '[<outputFile>]'   , 'file to write the license to', 'Prints the output to screen if not provided' ],
+        ];
     }
 }

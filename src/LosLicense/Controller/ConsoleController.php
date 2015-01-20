@@ -38,11 +38,11 @@ class ConsoleController extends AbstractActionController
         $writer = new \LosLicense\Config\Writer\PhpArray();
         $writer->setUseBracketArraySyntax(true);
 
-        $options = array(
+        $options = [
             'Trial',
             'Personal',
             'Standard'
-        );
+        ];
 
         $type = Select::prompt('License type?', $options, false, true);
 
@@ -63,7 +63,7 @@ class ConsoleController extends AbstractActionController
 
         if (Confirm::prompt("\nConfirm the license creation? [y/n] ", 'y', 'n')) {
             $data = [];
-            $config = new \Zend\Config\Config(array(), true);
+            $config = new \Zend\Config\Config([], true);
             $license = new License();
 
             if ($type == 0) {

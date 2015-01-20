@@ -13,6 +13,6 @@ $conf = [
     ],
 ];
 
-return array(
+return [
     'loslicense' => $conf
-);
+];
