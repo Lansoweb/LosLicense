@@ -4,6 +4,11 @@ namespace LosLicense\Options;
 use Zend\Stdlib\AbstractOptions;
 use LosLicense\Exception\InvalidArgumentException;
 use LosLicense\License\License;
+use LosLicense\Exception\RuntimeException;
+use LosLicense\License\LicenseInterface;
+use LosLicense\License\TrialLicense;
+use LosLicense\License\PersonalLicense;
+use LosLicense\License\StandardLicense;
 
 class ModuleOptions extends AbstractOptions
 {
@@ -34,7 +39,7 @@ class ModuleOptions extends AbstractOptions
     public function setUnlicensedValidators(array $unlicensedValidators)
     {
         $this->unlicensedValidators = $unlicensedValidators;
-
+        
         return $this;
     }
 
@@ -46,7 +51,7 @@ class ModuleOptions extends AbstractOptions
     public function setLicensedValidators(array $licensedValidators)
     {
         $this->licensedValidators = $licensedValidators;
-
+        
         return $this;
     }
 
@@ -55,7 +60,7 @@ class ModuleOptions extends AbstractOptions
         if ($unlicensedMode != 'whitelist' && $unlicensedMode != 'blacklist') {
             throw new InvalidArgumentException(sprintf('Invalid unlicensed mode set. Must be either "whitelist" or "blacklist", "%s" given', $unlicensedMode));
         }
-
+        
         $this->unlicensedMode = $unlicensedMode;
     }
 
@@ -74,7 +79,7 @@ class ModuleOptions extends AbstractOptions
         if (null === $this->templateStrategy) {
             $this->templateStrategy = new TemplateStrategyOptions();
         }
-
+        
         return $this->templateStrategy;
     }
 
@@ -88,7 +93,7 @@ class ModuleOptions extends AbstractOptions
         if (null === $this->redirectStrategy) {
             $this->redirectStrategy = new RedirectStrategyOptions();
         }
-
+        
         return $this->redirectStrategy;
     }
 
@@ -108,7 +113,7 @@ class ModuleOptions extends AbstractOptions
             $list[$feature] = $value;
         }
         $this->features = $list;
-
+        
         return $this;
     }
 
@@ -120,7 +125,7 @@ class ModuleOptions extends AbstractOptions
     public function setSignLicense($signLicense)
     {
         $this->signLicense = $signLicense;
-
+        
         return $this;
     }
 
@@ -132,21 +137,32 @@ class ModuleOptions extends AbstractOptions
     public function setSignatureSalt($signature_salt)
     {
         $this->signature_salt = $signature_salt;
-
+        
         return $this;
     }
 
     public function getLicense()
     {
         if (null == $this->license) {
-            $this->license = new License();
+            throw new RuntimeException("License not set yet.");
         }
-
+        
         return $this->license;
     }
 
     public function setLicense(array $license)
     {
-        $this->license = new License($license);
+        if (! \array_key_exists('type', $license)) {
+            throw new InvalidArgumentException("License configuration must have a 'type' key.");
+        }
+        if ($license['type'] == LicenseInterface::LICENSE_TRIAL) {
+            $this->license = new TrialLicense($license);
+        } elseif ($license['type'] == LicenseInterface::LICENSE_PERSONAL) {
+            $this->license = new PersonalLicense($license);
+        } elseif ($license['type'] == LicenseInterface::LICENSE_STANDARD) {
+            $this->license = new StandardLicense($license);
+        } else {
+            throw new InvalidArgumentException(sprintf("Invalid '%s' license type.", $license['type']));
+        }
     }
 }

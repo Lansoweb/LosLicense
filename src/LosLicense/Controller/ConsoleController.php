@@ -12,6 +12,9 @@ use Zend\Console\Prompt\Confirm;
 use LosLicense\License\License;
 use LosLicense\Console\Prompt\Checkbox;
 use LosLicense\Service\ValidatorServiceAwareTrait;
+use LosLicense\License\TrialLicense;
+use LosLicense\License\PersonalLicense;
+use LosLicense\License\StandardLicense;
 
 class ConsoleController extends AbstractActionController
 {
@@ -64,14 +67,16 @@ class ConsoleController extends AbstractActionController
         if (Confirm::prompt("\nConfirm the license creation? [y/n] ", 'y', 'n')) {
             $data = [];
             $config = new \Zend\Config\Config([], true);
-            $license = new License();
 
             if ($type == 0) {
                 $config->type = License::LICENSE_TRIAL;
+                $license = new TrialLicense();
             } elseif ($type == 1) {
                 $config->type = License::LICENSE_PERSONAL;
+                $license = new PersonalLicense();
             } else {
                 $config->type = License::LICENSE_STANDARD;
+                $license = new StandardLicense();
             }
 
             $license->setType($config->type);

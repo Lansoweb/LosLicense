@@ -12,6 +12,7 @@ namespace LosLicenseTest\License;
 
 use LosLicense\License\License;
 use LosLicenseTest\TestCase;
+use LosLicense\License\TrialLicense;
 
 class LicenseTest extends TestCase
 {
@@ -29,18 +30,12 @@ class LicenseTest extends TestCase
 
     public function setUp()
     {
-        $this->license = new License();
+        $this->license = new TrialLicense();
     }
 
     public function setUpLicense($globPath)
     {
         parent::setUpLicense($globPath);
-    }
-
-    public function testType()
-    {
-        $this->license->setType(License::LICENSE_STANDARD);
-        $this->assertSame(License::LICENSE_STANDARD, $this->license->getType());
     }
 
     public function testValidFrom()

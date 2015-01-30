@@ -1,10 +1,10 @@
 <?php
-use \LosLicense\License\License;
+use \LosLicense\License\LicenseInterface;
 
 $conf = [
     'sign_license' => true,
     'license' => [
-        'type' => License::LICENSE_TRIAL,
+        'type' => LicenseInterface::LICENSE_TRIAL,
         'customer' => 'Leandro Silva',
         'features' => [
             'test'

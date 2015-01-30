@@ -1,9 +1,9 @@
 <?php
-use \LosLicense\License\License;
+use LosLicense\License\LicenseInterface;
 
 $conf = [
     'license' => [
-        'type' => License::LICENSE_TRIAL,
+        'type' => LicenseInterface::LICENSE_TRIAL,
         'valid_from' => (new DateTime('+1 day'))->format('Y-m-d'),
     ],
 ];

@@ -4,19 +4,11 @@ namespace LosLicense\License;
 use Zend\Stdlib\AbstractOptions;
 use LosLicense\Exception\InvalidArgumentException;
 
-class License extends AbstractOptions
+abstract class License extends AbstractOptions implements LicenseInterface
 {
 
-    const LICENSE_NONE = 'loslicense-none';
-
-    const LICENSE_TRIAL = 'loslicense-trial';
-
-    const LICENSE_STANDARD = 'loslicense-standard';
-
-    const LICENSE_PERSONAL = 'loslicense-personal';
-
-    protected $type = self::LICENSE_NONE;
-
+    protected $__strictMode__ = false;
+    
     protected $valid_from;
 
     protected $valid_until;
@@ -28,18 +20,6 @@ class License extends AbstractOptions
     protected $attributes;
 
     protected $signature;
-
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     public function getValidFrom()
     {

@@ -1,5 +1,5 @@
 <?php
-use \LosLicense\License\License;
+use \LosLicense\License\LicenseInterface;
 
 $conf = [
     'features' => [
@@ -8,7 +8,7 @@ $conf = [
     ],
     'sign_license' => true,
     'license' => [
-        'type' => License::LICENSE_TRIAL,
+        'type' => LicenseInterface::LICENSE_TRIAL,
         'valid_from' => (new DateTime('-1 day'))->format('Y-m-d'),
         'valid_until' => (new DateTime('+1 day'))->format('Y-m-d'),
         'customer' => 'Leandro Silva',
@@ -20,7 +20,7 @@ $conf = [
             'maxAtt' => 20,
             'testAtt'
         ],
-        'signature' => 'e51703ef35f7ee5bd00afe3dabb2d6d0'
+        'signature' => '0b8df45f58b8ac58ddcf7c6c79b2f128'
     ],
 ];
 

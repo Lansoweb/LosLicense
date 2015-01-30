@@ -5,6 +5,8 @@ use LosLicense\Options\ModuleOptions;
 use LosLicense\Options\TemplateStrategyOptions;
 use LosLicense\Options\RedirectStrategyOptions;
 use LosLicense\License\License;
+use LosLicenseTest\TestCase;
+use LosLicense\License\TrialLicense;
 
 /**
  * ModuleOptions test case.
@@ -13,6 +15,7 @@ class ModuleOptionsTest extends TestCase
 {
 
     /**
+     *
      * @var ModuleOptions
      */
     private $ModuleOptions;
@@ -23,7 +26,7 @@ class ModuleOptionsTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-
+        
         $this->ModuleOptions = new ModuleOptions();
     }
 
@@ -33,7 +36,7 @@ class ModuleOptionsTest extends TestCase
     protected function tearDown()
     {
         $this->ModuleOptions = null;
-
+        
         parent::tearDown();
     }
 
@@ -76,7 +79,9 @@ class ModuleOptionsTest extends TestCase
                     'actions' => [
                         'foo'
                     ],
-                    'features' => ['test']
+                    'features' => [
+                        'test'
+                    ]
                 ]
             ]
         ];
@@ -203,7 +208,7 @@ class ModuleOptionsTest extends TestCase
             ],
             'signature' => '1f22f0199f9e9646a8dc59c6dd45d9d4'
         ];
-        $license = new License($licenseData);
+        $license = new TrialLicense($licenseData);
         $this->ModuleOptions->setLicense($licenseData);
         $this->assertEquals($license, $this->ModuleOptions->getLicense());
     }
@@ -213,7 +218,7 @@ class ModuleOptionsTest extends TestCase
      */
     public function testSetInvalidLicense()
     {
-        $this->setExpectedException('Zend\Stdlib\Exception\BadMethodCallException');
+        $this->setExpectedException('LosLicense\Exception\InvalidArgumentException');
         $this->ModuleOptions->setLicense([
             'invalid'
         ]);

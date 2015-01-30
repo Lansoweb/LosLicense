@@ -26,8 +26,8 @@ class HasFeatureTest extends TestCase
     public function testNoLicense()
     {
         $this->setUpNoLicense();
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
         $res = $this->helper->__invoke('numTest');
-        $this->assertFalse($res);
     }
 
     public function testInvalidLicenseFile()
