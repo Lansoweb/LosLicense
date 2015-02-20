@@ -1,5 +1,6 @@
 # Composer files
 composer.phar
+/composer.lock
 vendor/
 
 # Local configs
@@ -17,8 +18,6 @@ temp/
 /tests/TestConfiguration.php
 !*.gitadd
 !*.gitkeep
-.DS_Store
-Thumbs.db
 
 # Zend Studio files
 /.settings

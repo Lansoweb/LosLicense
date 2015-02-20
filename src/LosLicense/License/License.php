@@ -8,7 +8,7 @@ abstract class License extends AbstractOptions implements LicenseInterface
 {
 
     protected $__strictMode__ = false;
-    
+
     protected $valid_from;
 
     protected $valid_until;
@@ -33,7 +33,7 @@ abstract class License extends AbstractOptions implements LicenseInterface
         } catch (\Exception $ex) {
             throw new InvalidArgumentException(sprintf('Invalid datetime string for valid_from: %s', $valid_from), $ex->getCode());
         }
-        if ($this->valid_until != null) {
+        if ($this->valid_until !== null) {
             if ($this->valid_until < $this->valid_from) {
                 throw new InvalidArgumentException('valid_until must be after than valid_from');
             }
@@ -55,7 +55,7 @@ abstract class License extends AbstractOptions implements LicenseInterface
             throw new InvalidArgumentException(sprintf('Invalid datetime string for valid_until: %s', $valid_until), $ex->getCode());
         }
 
-        if ($this->valid_from != null) {
+        if ($this->valid_from !== null) {
             if ($this->valid_from > $this->valid_until) {
                 throw new InvalidArgumentException('valid_from must be before than valid_until');
             }

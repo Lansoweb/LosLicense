@@ -3,7 +3,7 @@
     "description" : "LosLicense provides a module to manage license keys for your ZF2 application",
     "require" : {
         "php" : ">=5.4.0",
-        "zendframework/zendframework" : "2.3.*"
+        "zendframework/zendframework" : ">=2.3.4"
     },
     "suggest": {
         "los/losbase": "los/losbase for some abstract classes to speed development ",
@@ -25,7 +25,7 @@
         },
         "classmap" : [ "./" ]
     },
-    "license" : "BSD-3",
+    "license" : "BSD-3-Clause",
     "type" : "library",
     "homepage" : "http://github.com/Lansoweb/LosLicense"
 }

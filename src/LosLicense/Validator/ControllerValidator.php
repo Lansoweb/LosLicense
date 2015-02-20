@@ -67,8 +67,6 @@ class ControllerValidator extends AbstractValidator
         $controller = strtolower($routeMatch->getParam('controller'));
         $action = strtolower($routeMatch->getParam('action'));
 
-        $options = $this->getServiceLocator()->get('loslicense.options');
-
         if (! isset($this->controllers[$controller])) {
             return true;
         }

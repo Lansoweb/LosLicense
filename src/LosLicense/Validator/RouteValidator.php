@@ -40,8 +40,6 @@ class RouteValidator extends AbstractValidator
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
 
-        $options = $this->getServiceLocator()->get('loslicense.options');
-
         $found = false;
         foreach (array_keys($this->routes) as $route) {
             if (fnmatch($route, $matchedRouteName, FNM_CASEFOLD)) {

@@ -12,7 +12,7 @@ trait ValidatorServiceAwareTrait
 
     public function getValidatorService()
     {
-        if ($this->validatorService == null) {
+        if ($this->validatorService === null) {
             $this->validatorService = new ValidatorService();
         }
 

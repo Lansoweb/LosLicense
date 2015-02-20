@@ -65,7 +65,6 @@ class ConsoleController extends AbstractActionController
         }
 
         if (Confirm::prompt("\nConfirm the license creation? [y/n] ", 'y', 'n')) {
-            $data = [];
             $config = new \Zend\Config\Config([], true);
 
             if ($type == 0) {
