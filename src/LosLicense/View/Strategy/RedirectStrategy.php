@@ -8,6 +8,8 @@ use LosLicense\Options\RedirectStrategyOptions;
 class RedirectStrategy extends AbstractStrategy
 {
 
+    protected $options;
+
     public function __construct(RedirectStrategyOptions $options)
     {
         $this->options = $options;

@@ -9,6 +9,8 @@ use LosLicense\Options\TemplateStrategyOptions;
 class TemplateStrategy extends AbstractStrategy
 {
 
+    protected $options;
+
     public function __construct(TemplateStrategyOptions $options)
     {
         $this->options = $options;
