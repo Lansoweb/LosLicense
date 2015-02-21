@@ -29,13 +29,10 @@ abstract class License extends AbstractOptions implements LicenseInterface
     {
         try {
             $dt = new \DateTime($date);
-
             return $dt;
         } catch (\Exception $ex) {
             throw new InvalidArgumentException(sprintf('Invalid datetime string for: %s', $date), $ex->getCode());
         }
-
-        return false;
     }
 
     private function validateDateRange()
