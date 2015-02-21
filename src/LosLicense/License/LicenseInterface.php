@@ -41,4 +41,6 @@ interface LicenseInterface
     public function getSignature();
 
     public function setSignature($signature);
+
+    public function getType();
 }

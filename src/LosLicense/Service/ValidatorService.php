@@ -30,7 +30,7 @@ class ValidatorService
         $license = $this->getServiceLocator()->get('loslicense.license');
 
         if (!$license) {
-            $this->errors = self::LICENSE_INVALID;
+            $this->error = self::LICENSE_INVALID;
 
             return false;
         }

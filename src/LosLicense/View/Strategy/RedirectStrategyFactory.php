@@ -3,6 +3,7 @@ namespace LosLicense\View\Strategy;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use LosLicense\Options\RedirectStrategyOptions;
 
 class RedirectStrategyFactory implements FactoryInterface
 {
@@ -15,7 +16,7 @@ class RedirectStrategyFactory implements FactoryInterface
         $config = $sl->get('loslicense.options');
 
         if (! $config) {
-            return new RedirectStrategy();
+            return new RedirectStrategy(new RedirectStrategyOptions());
         }
 
         return new RedirectStrategy($config->getRedirectStrategy());

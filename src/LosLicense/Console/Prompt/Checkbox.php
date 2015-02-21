@@ -1,62 +1,55 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 namespace LosLicense\Console\Prompt;
 
-use Zend\Console\Prompt\Char;
 use Zend\Console\Exception;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Console\Prompt\AbstractPrompt;
 
-class Checkbox extends Char
+final class Checkbox extends AbstractPrompt
 {
-
     /**
      * @var string
      */
-    protected $promptText = 'Please select an option (Enter to finish) ';
+    private $promptText;
 
     /**
      * @var bool
      */
-    protected $ignoreCase = true;
+    private $ignoreCase;
 
     /**
+     * @var array|Transversable
+     */
+    private $options;
+
+    /**
+     * Checked options
      * @var array
      */
-    protected $options = [];
+    private $checkedOptions = array();
+
+    /**
+     * If the response should be echoed to the console or not
+     * @var bool
+     */
+    private $echo;
 
     /**
      * Ask the user to select any number of pre-defined options
      *
-     * @param  string                           $promptText The prompt text to display in console
-     * @param  array                            $options    Allowed options
-     * @param  bool                             $allowEmpty Allow empty (no) selection?
-     * @param  bool                             $echo       True to display selected option?
-     * @throws Exception\BadMethodCallException if no options available
+     * @param string              $promptText The prompt text to display in console
+     * @param array|Transversable $options    Allowed options
+     * @param bool                $echo       True to display selected option?
      */
-    public function __construct($promptText = 'Please select one option (Enter to finish) ', $options = [], $allowEmpty = false, $echo = false)
+    public function __construct($promptText = 'Please select one option (Enter to finish) ', $options = array(), $ignoreCase = true, $echo = false)
     {
-        if ($promptText !== null) {
-            $this->setPromptText($promptText);
-        }
-
-        if (! count($options)) {
-            throw new Exception\BadMethodCallException('Cannot construct a "checkbox" prompt without any options');
-        }
+        $this->promptText = (string) $promptText;
 
         $this->setOptions($options);
 
-        if ($allowEmpty !== null) {
-            $this->setAllowEmpty($allowEmpty);
-        }
+        $this->echo = (bool) $echo;
 
-        if ($echo !== null) {
-            $this->setEcho($echo);
-        }
+        $this->ignoreCase = (bool) $ignoreCase;
     }
 
     /**
@@ -67,82 +60,120 @@ class Checkbox extends Char
     public function show()
     {
         $console = $this->getConsole();
-        $checked = [];
+        $this->checkedOptions = array();
+        $mask = $this->prepareMask();
+
         do {
-            // Show prompt text and available options
-            $console->writeLine($this->promptText);
-            foreach ($this->options as $k => $v) {
-                $console->writeLine('  ' . $k . ') ' . (in_array($v, $checked) ? '[X] ' : '[ ] ') . $v);
-            }
+            $this->showAvailableOptions();
 
-            // Prepare mask
-            $mask = implode("", array_keys($this->options));
-            $mask .= "\r\n";
+            $response = $this->readOption($mask);
 
-            // Prepare other params for parent class
-            $this->setAllowedChars($mask);
-            $oldPrompt = $this->promptText;
-            $oldEcho = $this->echo;
-            $this->echo = false;
-            $this->promptText = null;
-
-            // Retrieve a single character
-            $response = parent::show();
-
-            // Restore old params
-            $this->promptText = $oldPrompt;
-            $this->echo = $oldEcho;
-
-            // Display selected option if echo is enabled
             if ($this->echo) {
-                if (isset($this->options[$response])) {
-                    $console->writeLine($this->options[$response]);
-                } else {
-                    $console->writeLine();
-                }
+                $this->showResponse();
             }
-            if ($response != "\r" && $response != "\n" && isset($this->options[$response])) {
-                $pos = array_search($this->options[$response], $checked);
-                if ($pos === false) {
-                    $checked[] = $this->options[$response];
-                } else {
-                    array_splice($checked, $pos, 1);
-                }
-            }
+
+            $this->checkOrUncheckOption($response);
         } while ($response != "\r" && $response != "\n");
 
-        $this->lastResponse = $checked;
+        $this->lastResponse = $this->checkedOptions;
 
-        return $checked;
+        return $this->checkedOptions;
+    }
+
+    /**
+     * Shows the selected option to the screen
+     * @param string $response
+     */
+    private function showResponse($response)
+    {
+        $console = $this->getConsole();
+        if (isset($this->options[$response])) {
+            $console->writeLine($this->options[$response]);
+        } else {
+            $console->writeLine();
+        }
+    }
+
+    /**
+     * Check or uncheck an option
+     *
+     * @param string $response
+     */
+    private function checkOrUncheckOption($response)
+    {
+        if ($response != "\r" && $response != "\n" && isset($this->options[$response])) {
+            $pos = array_search($this->options[$response], $this->checkedOptions);
+            if ($pos === false) {
+                $this->checkedOptions[] = $this->options[$response];
+            } else {
+                array_splice($this->checkedOptions, $pos, 1);
+            }
+        }
+    }
+
+    /**
+     * Generates a mask to to be used by the readChar method.
+     *
+     * @return string
+     */
+    private function prepareMask()
+    {
+        $mask = implode("", array_keys($this->options)) . "\r\n";
+
+        /**
+         * Normalize the mask if case is irrelevant
+         */
+        if (!$this->ignoreCase) {
+            return $mask;
+        }
+
+        $mask = implode("", array_unique(str_split(strtolower($mask) . strtoupper($mask))));
+
+        return $mask;
+    }
+
+    /**
+     * Reads a char from console.
+     *
+     * @param  string $mask
+     * @return string
+     */
+    private function readOption($mask)
+    {
+        /**
+         * Read char from console
+         */
+
+        return $this->getConsole()->readChar($mask);
+    }
+
+    /**
+     * Shows the available options with checked and unchecked states
+     */
+    private function showAvailableOptions()
+    {
+        $console = $this->getConsole();
+        $console->writeLine($this->promptText);
+        foreach ($this->options as $k => $v) {
+            $console->writeLine('  ' . $k . ') ' . (in_array($v, $this->checkedOptions) ? '[X] ' : '[ ] ') . $v);
+        }
     }
 
     /**
      * Set allowed options
      *
-     * @param  array|\Traversable               $options
-     * @throws Exception\BadMethodCallException
+     * @param  array|\Traversable                 $options
+     * @throws Exception\InvalidArgumentException
      */
-    public function setOptions($options)
+    private function setOptions($options)
     {
-        if (! is_array($options) && ! $options instanceof \Traversable) {
-            throw new Exception\BadMethodCallException('Please specify an array or Traversable object as options');
+        $options = ArrayUtils::iteratorToArray($options);
+
+        if (empty($options)) {
+            throw new Exception\InvalidArgumentException('Please, specify at least one option');
         }
 
-        if (! is_array($options)) {
-            $this->options = [];
-            foreach ($options as $k => $v) {
-                $this->options[$k] = $v;
-            }
-        } else {
-            $this->options = $options;
-        }
+        $this->options = $options;
     }
 
-    /**
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
 }

@@ -139,4 +139,6 @@ abstract class License extends AbstractOptions implements LicenseInterface
 
         return $this;
     }
+
+    abstract public function getType();
 }
