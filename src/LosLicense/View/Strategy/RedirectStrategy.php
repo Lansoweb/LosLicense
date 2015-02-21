@@ -3,32 +3,20 @@ namespace LosLicense\View\Strategy;
 
 use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\MvcEvent;
-use Zend\EventManager\AbstractListenerAggregate;
-use Zend\EventManager\EventManagerInterface;
-use LosLicense\Exception\UnlicensedException;
 use LosLicense\Options\RedirectStrategyOptions;
 
-class RedirectStrategy extends AbstractListenerAggregate
+class RedirectStrategy extends AbstractStrategy
 {
-    protected $options;
 
     public function __construct(RedirectStrategyOptions $options)
     {
-        $this->options               = $options;
-    }
-
-    public function attach(EventManagerInterface $events)
-    {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'onError']);
+        $this->options = $options;
     }
 
     public function onError(MvcEvent $event)
     {
         // Do nothing if no error or if response is not HTTP response
-        if (!($event->getParam('exception') instanceof UnlicensedException)
-            || ($event->getResult() instanceof HttpResponse)
-            || !($event->getResponse() instanceof HttpResponse)
-        ) {
+        if (! $this->validateEvent($event)) {
             return;
         }
 
@@ -36,9 +24,11 @@ class RedirectStrategy extends AbstractListenerAggregate
 
         $redirectRoute = $this->options->getRedirectTo();
 
-        $uri = $router->assemble([], ['name' => $redirectRoute]);
+        $uri = $router->assemble([], [
+            'name' => $redirectRoute
+        ]);
 
-        $response = $event->getResponse() ?: new HttpResponse();
+        $response = $event->getResponse() ?  : new HttpResponse();
 
         $response->getHeaders()->addHeaderLine('Location', $uri);
         $response->setStatusCode(302);

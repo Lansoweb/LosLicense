@@ -20,7 +20,7 @@ $conf = [
             'maxAtt' => 20,
             'testAtt'
         ],
-        'signature' => '0b8df45f58b8ac58ddcf7c6c79b2f128'
+        'signature' => '49e54ff88f1ee125cd39f61a8e1bcb32'
     ],
 ];
 

@@ -26,7 +26,7 @@ class ModuleOptionsTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        
+
         $this->ModuleOptions = new ModuleOptions();
     }
 
@@ -36,7 +36,7 @@ class ModuleOptionsTest extends TestCase
     protected function tearDown()
     {
         $this->ModuleOptions = null;
-        
+
         parent::tearDown();
     }
 

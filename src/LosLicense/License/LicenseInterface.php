@@ -5,11 +5,11 @@ interface LicenseInterface
 {
 
     const LICENSE_TRIAL = 'loslicense-trial';
-    
+
     const LICENSE_STANDARD = 'loslicense-standard';
-    
+
     const LICENSE_PERSONAL = 'loslicense-personal';
-    
+
     public function getValidFrom();
 
     public function setValidFrom($valid_from);

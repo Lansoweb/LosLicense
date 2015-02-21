@@ -5,7 +5,8 @@ use Zend\Mvc\MvcEvent;
 
 class RouteValidator extends AbstractValidator
 {
-    const EVENT_PRIORITY = -10;
+
+    const EVENT_PRIORITY = - 10;
 
     protected $routes = [];
 
@@ -26,10 +27,10 @@ class RouteValidator extends AbstractValidator
         foreach ($routes as $key => $value) {
             if (is_int($key)) {
                 $routeRegex = $value;
-                $roles      = [];
+                $roles = [];
             } else {
                 $routeRegex = $key;
-                $roles      = (array) $value;
+                $roles = (array) $value;
             }
 
             $this->routes[$routeRegex] = $roles;
@@ -43,21 +44,16 @@ class RouteValidator extends AbstractValidator
         $found = false;
         foreach (array_keys($this->routes) as $route) {
             if (fnmatch($route, $matchedRouteName, FNM_CASEFOLD)) {
-                echo $route;
-                $found = true;
-                break;
+                $service = $this->getServiceLocator()->get('loslicense.validator');
+
+                $licenses = isset($this->routes[$route]['licenses']) ? $this->routes[$route]['licenses'] : [];
+                $features = isset($this->routes[$route]['features']) ? $this->routes[$route]['features'] : [];
+
+                return $service->checkLicensesAndFeatures($licenses, $features);
             }
         }
-        if (!$found) {
-            return true;
-        }
 
-        $service = $this->getServiceLocator()->get('loslicense.validator');
-
-        $licenses = isset($this->routes[$route]['licenses']) ? $this->routes[$route]['licenses'] : [];
-        $features = isset($this->routes[$route]['features']) ? $this->routes[$route]['features'] : [];
-
-        return $service->checkLicensesAndFeatures($licenses, $features);
+        return true;
     }
 
     /**

@@ -6,6 +6,7 @@ use LosLicense\Exception\InvalidArgumentException;
 
 abstract class License extends AbstractOptions implements LicenseInterface
 {
+    use FeaturesTrait;
 
     protected $__strictMode__ = false;
 
@@ -14,8 +15,6 @@ abstract class License extends AbstractOptions implements LicenseInterface
     protected $valid_until;
 
     protected $customer;
-
-    protected $features;
 
     protected $attributes;
 
@@ -26,18 +25,34 @@ abstract class License extends AbstractOptions implements LicenseInterface
         return $this->valid_from;
     }
 
-    public function setValidFrom($valid_from)
+    private function validateDate($date)
     {
         try {
-            $this->valid_from = new \DateTime($valid_from);
+            $dt = new \DateTime($date);
+
+            return $dt;
         } catch (\Exception $ex) {
-            throw new InvalidArgumentException(sprintf('Invalid datetime string for valid_from: %s', $valid_from), $ex->getCode());
+            throw new InvalidArgumentException(sprintf('Invalid datetime string for: %s', $date), $ex->getCode());
         }
-        if ($this->valid_until !== null) {
-            if ($this->valid_until < $this->valid_from) {
-                throw new InvalidArgumentException('valid_until must be after than valid_from');
-            }
+
+        return false;
+    }
+
+    private function validateDateRange()
+    {
+        if ($this->valid_from === null || $this->valid_until === null) {
+            return true;
         }
+
+        if ($this->valid_until < $this->valid_from) {
+            throw new InvalidArgumentException('valid_until must be greater than valid_from');
+        }
+    }
+
+    public function setValidFrom($valid_from)
+    {
+        $this->valid_from = $this->validateDate($valid_from);
+        $this->validateDateRange();
 
         return $this;
     }
@@ -49,17 +64,8 @@ abstract class License extends AbstractOptions implements LicenseInterface
 
     public function setValidUntil($valid_until)
     {
-        try {
-            $this->valid_until = new \DateTime($valid_until);
-        } catch (\Exception $ex) {
-            throw new InvalidArgumentException(sprintf('Invalid datetime string for valid_until: %s', $valid_until), $ex->getCode());
-        }
-
-        if ($this->valid_from !== null) {
-            if ($this->valid_from > $this->valid_until) {
-                throw new InvalidArgumentException('valid_from must be before than valid_until');
-            }
-        }
+        $this->valid_until = $this->validateDate($valid_until);
+        $this->validateDateRange();
 
         return $this;
     }
@@ -74,52 +80,6 @@ abstract class License extends AbstractOptions implements LicenseInterface
         $this->customer = $customer;
 
         return $this;
-    }
-
-    public function getFeatures()
-    {
-        return $this->features;
-    }
-
-    public function setFeatures(array $features)
-    {
-        $list = [];
-        foreach ($features as $feature => $value) {
-            if (is_numeric($feature)) {
-                $feature = $value;
-                $value = null;
-            }
-            $list[$feature] = $value;
-        }
-        $this->features = $list;
-
-        return $this;
-    }
-
-    public function hasFeature($features)
-    {
-        if (empty($this->features)) {
-            return false;
-        }
-
-        if (!is_array($features)) {
-            $features = (array) $features;
-        }
-        foreach ($features as $feature) {
-            if (!in_array($feature, array_keys($this->features))) return false;
-        }
-
-        return true;
-    }
-
-    public function getFeature($feature)
-    {
-        if (empty($this->features)) {
-            return false;
-        }
-
-        if (in_array($feature, array_keys($this->features))) return $this->features[$feature];
-        return false;
     }
 
     public function getAttributes()
@@ -179,5 +139,4 @@ abstract class License extends AbstractOptions implements LicenseInterface
 
         return $this;
     }
-
 }

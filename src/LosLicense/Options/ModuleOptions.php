@@ -3,15 +3,16 @@ namespace LosLicense\Options;
 
 use Zend\Stdlib\AbstractOptions;
 use LosLicense\Exception\InvalidArgumentException;
-use LosLicense\License\License;
 use LosLicense\Exception\RuntimeException;
 use LosLicense\License\LicenseInterface;
 use LosLicense\License\TrialLicense;
 use LosLicense\License\PersonalLicense;
 use LosLicense\License\StandardLicense;
+use LosLicense\License\FeaturesTrait;
 
 class ModuleOptions extends AbstractOptions
 {
+    use FeaturesTrait;
 
     protected $unlicensedValidators = [];
 
@@ -22,8 +23,6 @@ class ModuleOptions extends AbstractOptions
     protected $templateStrategy;
 
     protected $redirectStrategy;
-
-    protected $features;
 
     protected $signLicense = false;
 
@@ -95,26 +94,6 @@ class ModuleOptions extends AbstractOptions
         }
 
         return $this->redirectStrategy;
-    }
-
-    public function getFeatures()
-    {
-        return $this->features;
-    }
-
-    public function setFeatures(array $features)
-    {
-        $list = [];
-        foreach ($features as $feature => $value) {
-            if (is_numeric($feature)) {
-                $feature = $value;
-                $value = null;
-            }
-            $list[$feature] = $value;
-        }
-        $this->features = $list;
-
-        return $this;
     }
 
     public function getSignLicense()

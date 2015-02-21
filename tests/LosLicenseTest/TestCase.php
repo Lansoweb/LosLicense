@@ -58,6 +58,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
     public function setUpValidLicense()
     {
         $this->setUpLicense(realpath(__DIR__.'/config/validlicense.config.php'));
+        $license = $this->serviceManager->get('loslicense.license');
+        $license->setSignature($this->getValidatorService()->signLicense($license));
     }
 
 }
