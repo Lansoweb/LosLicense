@@ -29,6 +29,7 @@ abstract class License extends AbstractOptions implements LicenseInterface
     {
         try {
             $dt = new \DateTime($date);
+
             return $dt;
         } catch (\Exception $ex) {
             throw new InvalidArgumentException(sprintf('Invalid datetime string for: %s', $date), $ex->getCode());
@@ -109,7 +110,9 @@ abstract class License extends AbstractOptions implements LicenseInterface
             $attributes = (array) $attributes;
         }
         foreach ($attributes as $attribute) {
-            if (!in_array($attribute, array_keys($this->attributes))) return false;
+            if (!in_array($attribute, array_keys($this->attributes))) {
+                return false;
+            }
         }
 
         return true;
@@ -121,7 +124,10 @@ abstract class License extends AbstractOptions implements LicenseInterface
             return false;
         }
 
-        if (in_array($attribute, array_keys($this->attributes))) return $this->attributes[$attribute];
+        if (in_array($attribute, array_keys($this->attributes))) {
+            return $this->attributes[$attribute];
+        }
+
         return false;
     }
 

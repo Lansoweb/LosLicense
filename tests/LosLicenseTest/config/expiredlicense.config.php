@@ -9,5 +9,5 @@ $conf = [
 ];
 
 return [
-    'loslicense' => $conf
+    'loslicense' => $conf,
 ];

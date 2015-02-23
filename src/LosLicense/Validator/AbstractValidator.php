@@ -19,7 +19,7 @@ abstract class AbstractValidator implements ListenerAggregateInterface
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, [
             $this,
-            'onRoute'
+            'onRoute',
         ], static::EVENT_PRIORITY);
     }
 

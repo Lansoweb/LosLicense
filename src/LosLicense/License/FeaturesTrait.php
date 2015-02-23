@@ -36,7 +36,9 @@ trait FeaturesTrait
             $features = (array) $features;
         }
         foreach ($features as $feature) {
-            if (!in_array($feature, array_keys($this->features))) return false;
+            if (!in_array($feature, array_keys($this->features))) {
+                return false;
+            }
         }
 
         return true;
@@ -48,7 +50,10 @@ trait FeaturesTrait
             return false;
         }
 
-        if (in_array($feature, array_keys($this->features))) return $this->features[$feature];
+        if (in_array($feature, array_keys($this->features))) {
+            return $this->features[$feature];
+        }
+
         return false;
     }
 }

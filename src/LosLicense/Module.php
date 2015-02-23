@@ -25,7 +25,6 @@ class Module implements AutoloaderProviderInterface, ConsoleUsageProviderInterfa
 {
     public function onBootstrap($e)
     {
-
         $application    = $e->getTarget();
         $serviceManager = $application->getServiceManager();
         $eventManager   = $application->getEventManager();

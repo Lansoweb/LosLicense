@@ -68,5 +68,4 @@ class HasFeatureTest extends TestCase
         $res = $this->helper->__invoke('numTest2');
         $this->assertFalse($res);
     }
-
 }

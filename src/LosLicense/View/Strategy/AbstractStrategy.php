@@ -14,7 +14,7 @@ abstract class AbstractStrategy extends AbstractListenerAggregate
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, [
             $this,
-            'onError'
+            'onError',
         ]);
     }
 

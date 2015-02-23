@@ -4,7 +4,7 @@ use \LosLicense\License\LicenseInterface;
 $conf = [
     'features' => [
         'numTest' => 20,
-        'testFeature'
+        'testFeature',
     ],
     'sign_license' => true,
     'license' => [
@@ -14,16 +14,16 @@ $conf = [
         'customer' => 'Leandro Silva',
         'features' => [
             'numTest' => 5,
-            'testFeature'
+            'testFeature',
         ],
         'attributes' => [
             'maxAtt' => 20,
-            'testAtt'
+            'testAtt',
         ],
-        'signature' => '49e54ff88f1ee125cd39f61a8e1bcb32'
+        'signature' => '49e54ff88f1ee125cd39f61a8e1bcb32',
     ],
 ];
 
 return [
-    'loslicense' => $conf
+    'loslicense' => $conf,
 ];

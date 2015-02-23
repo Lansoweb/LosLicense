@@ -7,12 +7,12 @@ $conf = [
         'type' => LicenseInterface::LICENSE_TRIAL,
         'customer' => 'Leandro Silva',
         'features' => [
-            'test'
+            'test',
         ],
-        'signature' => '1f22f0199f9e9646a8dc59c6dd45d9d4'
+        'signature' => '1f22f0199f9e9646a8dc59c6dd45d9d4',
     ],
 ];
 
 return [
-    'loslicense' => $conf
+    'loslicense' => $conf,
 ];

@@ -9,7 +9,7 @@ class PhpArray extends ZfPhpArray
     {
         $arraySyntax = [
             'open' => $this->useBracketArraySyntax ? '[' : 'array(',
-            'close' => $this->useBracketArraySyntax ? ']' : ')'
+            'close' => $this->useBracketArraySyntax ? ']' : ')',
         ];
 
         return $this->processIndented($config, $arraySyntax);

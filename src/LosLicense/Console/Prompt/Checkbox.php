@@ -117,7 +117,7 @@ final class Checkbox extends AbstractPrompt
      */
     private function prepareMask()
     {
-        $mask = implode("", array_keys($this->options)) . "\r\n";
+        $mask = implode("", array_keys($this->options))."\r\n";
 
         /**
          * Normalize the mask if case is irrelevant
@@ -126,7 +126,7 @@ final class Checkbox extends AbstractPrompt
             return $mask;
         }
 
-        $mask = implode("", array_unique(str_split(strtolower($mask) . strtoupper($mask))));
+        $mask = implode("", array_unique(str_split(strtolower($mask).strtoupper($mask))));
 
         return $mask;
     }
@@ -154,7 +154,7 @@ final class Checkbox extends AbstractPrompt
         $console = $this->getConsole();
         $console->writeLine($this->promptText);
         foreach ($this->options as $k => $v) {
-            $console->writeLine('  ' . $k . ') ' . (in_array($v, $this->checkedOptions) ? '[X] ' : '[ ] ') . $v);
+            $console->writeLine('  '.$k.') '.(in_array($v, $this->checkedOptions) ? '[X] ' : '[ ] ').$v);
         }
     }
 

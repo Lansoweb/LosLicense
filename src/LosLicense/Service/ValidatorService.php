@@ -80,7 +80,7 @@ class ValidatorService
         }
 
         $salt = $options->getSignatureSalt();
-        $hash = md5(json_encode($str) . $salt);
+        $hash = md5(json_encode($str).$salt);
 
         return $hash;
     }

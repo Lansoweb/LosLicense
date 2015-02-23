@@ -26,7 +26,7 @@ class TemplateStrategy extends AbstractStrategy
         $model->setTemplate($this->options->getTemplate());
         $model->setVariable('error', $event->getError());
 
-        $response = $event->getResponse() ?  : new HttpResponse();
+        $response = $event->getResponse() ?: new HttpResponse();
         $response->setStatusCode(403);
 
         $event->setResponse($response);

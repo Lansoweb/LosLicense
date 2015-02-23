@@ -58,10 +58,10 @@ class ModuleOptionsTest extends TestCase
                 [
                     'controller' => 'application\controller\index',
                     'actions' => [
-                        'foo'
-                    ]
-                ]
-            ]
+                        'foo',
+                    ],
+                ],
+            ],
         ];
         $this->ModuleOptions->setUnlicensedValidators($validators);
         $this->assertSame($validators, $this->ModuleOptions->getUnlicensedValidators());
@@ -77,13 +77,13 @@ class ModuleOptionsTest extends TestCase
                 [
                     'controller' => 'application\controller\index',
                     'actions' => [
-                        'foo'
+                        'foo',
                     ],
                     'features' => [
-                        'test'
-                    ]
-                ]
-            ]
+                        'test',
+                    ],
+                ],
+            ],
         ];
         $this->ModuleOptions->setLicensedValidators($validators);
         $this->assertSame($validators, $this->ModuleOptions->getLicensedValidators());
@@ -110,10 +110,10 @@ class ModuleOptionsTest extends TestCase
     public function testSetGetTemplateStrategy()
     {
         $strategy = new TemplateStrategyOptions([
-            'template' => 'myerror/403'
+            'template' => 'myerror/403',
         ]);
         $this->ModuleOptions->setTemplateStrategy([
-            'template' => 'myerror/403'
+            'template' => 'myerror/403',
         ]);
         $this->assertEquals($strategy, $this->ModuleOptions->getTemplateStrategy());
     }
@@ -125,7 +125,7 @@ class ModuleOptionsTest extends TestCase
     {
         $this->setExpectedException('Zend\Stdlib\Exception\BadMethodCallException');
         $this->ModuleOptions->setTemplateStrategy([
-            'invalid'
+            'invalid',
         ]);
     }
 
@@ -135,10 +135,10 @@ class ModuleOptionsTest extends TestCase
     public function testSetGetRedirectStrategy()
     {
         $strategy = new RedirectStrategyOptions([
-            'redirectTo' => 'myerror'
+            'redirectTo' => 'myerror',
         ]);
         $this->ModuleOptions->setRedirectStrategy([
-            'redirectTo' => 'myerror'
+            'redirectTo' => 'myerror',
         ]);
         $this->assertEquals($strategy, $this->ModuleOptions->getRedirectStrategy());
     }
@@ -150,7 +150,7 @@ class ModuleOptionsTest extends TestCase
     {
         $this->setExpectedException('Zend\Stdlib\Exception\BadMethodCallException');
         $this->ModuleOptions->setRedirectStrategy([
-            'invalid'
+            'invalid',
         ]);
     }
 
@@ -161,11 +161,11 @@ class ModuleOptionsTest extends TestCase
     {
         $rawFeatures = [
             'numTest' => 20,
-            'testFeature'
+            'testFeature',
         ];
         $features = [
             'numTest' => 20,
-            'testFeature' => null
+            'testFeature' => null,
         ];
         $this->ModuleOptions->setFeatures($rawFeatures);
         $this->assertSame($features, $this->ModuleOptions->getFeatures());
@@ -201,12 +201,12 @@ class ModuleOptionsTest extends TestCase
             'customer' => 'Leandro Silva',
             'features' => [
                 'num_teste' => 5,
-                'teste'
+                'teste',
             ],
             'attributes' => [
-                'max_teste' => 20
+                'max_teste' => 20,
             ],
-            'signature' => '1f22f0199f9e9646a8dc59c6dd45d9d4'
+            'signature' => '1f22f0199f9e9646a8dc59c6dd45d9d4',
         ];
         $license = new TrialLicense($licenseData);
         $this->ModuleOptions->setLicense($licenseData);
@@ -220,7 +220,7 @@ class ModuleOptionsTest extends TestCase
     {
         $this->setExpectedException('LosLicense\Exception\InvalidArgumentException');
         $this->ModuleOptions->setLicense([
-            'invalid'
+            'invalid',
         ]);
     }
 }

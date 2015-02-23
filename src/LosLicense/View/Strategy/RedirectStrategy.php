@@ -27,10 +27,10 @@ class RedirectStrategy extends AbstractStrategy
         $redirectRoute = $this->options->getRedirectTo();
 
         $uri = $router->assemble([], [
-            'name' => $redirectRoute
+            'name' => $redirectRoute,
         ]);
 
-        $response = $event->getResponse() ?  : new HttpResponse();
+        $response = $event->getResponse() ?: new HttpResponse();
 
         $response->getHeaders()->addHeaderLine('Location', $uri);
         $response->setStatusCode(302);

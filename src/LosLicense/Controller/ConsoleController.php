@@ -36,7 +36,7 @@ class ConsoleController extends AbstractActionController
 
         $this->setValidatorService($this->getServiceLocator()->get('loslicense.validator'));
 
-        $outputFile = $request->getParam('outputFile',null);
+        $outputFile = $request->getParam('outputFile', null);
 
         $writer = new \LosLicense\Config\Writer\PhpArray();
         $writer->setUseBracketArraySyntax(true);
@@ -44,7 +44,7 @@ class ConsoleController extends AbstractActionController
         $options = [
             'Trial',
             'Personal',
-            'Standard'
+            'Standard',
         ];
 
         $type = Select::prompt('License type?', $options, false, true);

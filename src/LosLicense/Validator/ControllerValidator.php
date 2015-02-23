@@ -33,7 +33,7 @@ class ControllerValidator extends AbstractValidator
             $this->controllers[$controller] = [
                 'actions' => [],
                 'licenses' => [],
-                'features' => []
+                'features' => [],
             ];
 
             if (! empty($actions)) {

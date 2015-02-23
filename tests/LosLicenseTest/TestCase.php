@@ -61,5 +61,4 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $license = $this->serviceManager->get('loslicense.license');
         $license->setSignature($this->getValidatorService()->signLicense($license));
     }
-
 }

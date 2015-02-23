@@ -65,5 +65,4 @@ class IsLicensedTest extends TestCase
         $this->assertTrue($res);
         $this->assertFalse($this->getValidatorService()->getError());
     }
-
 }

@@ -20,12 +20,12 @@ class LicenseTest extends TestCase
     protected $rawFeatures =
     [
         'feature1',
-        'feature2' => 10
+        'feature2' => 10,
     ];
     protected $rawAttributes =
     [
         'attribute1',
-        'attribute2' => 10
+        'attribute2' => 10,
     ];
 
     public function setUp()
@@ -95,7 +95,7 @@ class LicenseTest extends TestCase
     {
         $features = [
             'feature1' => null,
-            'feature2' => 10
+            'feature2' => 10,
         ];
         $this->license->setFeatures($this->rawFeatures);
         $this->assertSame($features, $this->license->getFeatures());
@@ -118,7 +118,7 @@ class LicenseTest extends TestCase
     {
         $attributes = [
             'attribute1' => null,
-            'attribute2' => 10
+            'attribute2' => 10,
         ];
         $this->license->setAttributes($this->rawAttributes);
         $this->assertSame($attributes, $this->license->getAttributes());
@@ -143,5 +143,4 @@ class LicenseTest extends TestCase
         $this->license->setSignature($signature);
         $this->assertSame($signature, $this->license->getSignature());
     }
-
 }
