@@ -1,4 +1,13 @@
 <phpunit bootstrap="./bootstrap.php" colors="true">
+    <logging>
+        <log type="coverage-clover" target="../build/logs/clover.xml"/>
+    </logging>
+    <filter>
+        <blacklist>
+            <directory suffix=".php">../vendor</directory>
+            <directory suffix=".php">.</directory>
+        </blacklist>
+    </filter>
     <testsuites>
         <testsuite name="LosLicense Test Suite">
             <directory>./</directory>

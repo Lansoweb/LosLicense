@@ -15,6 +15,7 @@ data/cache/
 data/sessions/
 data/tmp/
 temp/
+/build
 /tests/TestConfiguration.php
 !*.gitadd
 !*.gitkeep
