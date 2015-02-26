@@ -36,15 +36,9 @@ class ControllerValidator extends AbstractValidator
                 'features' => [],
             ];
 
-            if (! empty($actions)) {
-                $this->controllers[$controller]['actions'] = array_map('strtolower', $actions);
-            }
-            if (! empty($licenses)) {
-                $this->controllers[$controller]['licenses'] = $licenses;
-            }
-            if (! empty($features)) {
-                $this->controllers[$controller]['features'] = array_map('strtolower', $features);
-            }
+            $this->controllers[$controller]['actions'] = array_map('strtolower', $actions);
+            $this->controllers[$controller]['licenses'] = $licenses;
+            $this->controllers[$controller]['features'] = array_map('strtolower', $features);
         }
 
         return $this;
