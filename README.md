@@ -1,4 +1,10 @@
 # LosLicense
+
+> [!WARNING]
+> ## Archived
+> This ZF2 license-key module is no longer maintained and will receive no
+> further releases. Preserve it only for existing applications and implement
+> licensing in a maintained service or library for new products.
 [![Build Status](https://travis-ci.org/Lansoweb/LosLicense.svg?branch=master)](https://travis-ci.org/Lansoweb/LosLicense) [![Latest Stable Version](https://poser.pugx.org/los/loslicense/v/stable.svg)](https://packagist.org/packages/los/loslicense) [![Total Downloads](https://poser.pugx.org/los/loslicense/downloads.svg)](https://packagist.org/packages/los/loslicense) [![Coverage Status](https://coveralls.io/repos/Lansoweb/LosLicense/badge.svg?branch=master)](https://coveralls.io/r/Lansoweb/LosLicense?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lansoweb/LosLicense/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Lansoweb/LosLicense/?branch=master) [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/dc058d0c-b959-4cb6-aead-31d80b1ba64f.svg?style=flat)](https://insight.sensiolabs.com/projects/dc058d0c-b959-4cb6-aead-31d80b1ba64f) [![Dependency Status](https://www.versioneye.com/user/projects/54e8471cd1ec5734f4000e0a/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54e8471cd1ec5734f4000e0a)
 
 ## Introduction
